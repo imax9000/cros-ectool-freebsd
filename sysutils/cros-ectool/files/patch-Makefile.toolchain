@@ -1,0 +1,33 @@
+--- ./Makefile.toolchain.orig	2013-03-12 05:08:56.000000000 +0000
++++ ./Makefile.toolchain	2014-05-24 16:19:03.000000000 +0100
+@@ -10,19 +10,19 @@
+ CROSS_COMPILE ?= arm-none-eabi-
+ HOST_CROSS_COMPILE ?= x86_64-pc-linux-gnu-
+ 
+-CC=$(CROSS_COMPILE)gcc
++CC=$(CROSS_COMPILE)cc
+ CPP=$(CROSS_COMPILE)cpp
+ LD=$(CROSS_COMPILE)ld
+ OBJCOPY=$(CROSS_COMPILE)objcopy
+ OBJDUMP=$(CROSS_COMPILE)objdump
+-BUILDCC?=gcc
+-HOSTCC?=$(HOST_CROSS_COMPILE)gcc
++BUILDCC?=cc
++HOSTCC?=$(HOST_CROSS_COMPILE)cc
+ 
+ CFLAGS_WARN=-Wall -Werror -Wundef -Wstrict-prototypes -Wno-trigraphs      \
+             -fno-strict-aliasing -fno-common                              \
+             -Werror-implicit-function-declaration -Wno-format-security    \
+-            -fno-delete-null-pointer-checks -Wdeclaration-after-statement \
+-            -Wno-pointer-sign -fno-strict-overflow -fconserve-stack
++            -Wdeclaration-after-statement \
++            -Wno-pointer-sign -fno-strict-overflow 
+ CFLAGS_DEBUG= -g
+ CFLAGS_INCLUDE=$(foreach i,$(includes),-I$(i) )
+ CFLAGS_DEFINE=-DOUTDIR=$(out) -DCHIP=$(CHIP) -DTASKFILE=$(PROJECT).tasklist \
+@@ -33,5 +33,4 @@
+ CFLAGS=$(CPPFLAGS) $(CFLAGS_CPU) $(CFLAGS_DEBUG) $(CFLAGS_WARN) $(CFLAGS_y)
+ BUILD_CFLAGS=$(CPPFLAGS) -O3 $(CFLAGS_DEBUG) $(CFLAGS_WARN)
+ HOST_CFLAGS=$(CPPFLAGS) -O3 $(CFLAGS_DEBUG) $(CFLAGS_WARN)
+-LDFLAGS=-nostdlib -X
+ BUILD_LDFLAGS=-lftdi

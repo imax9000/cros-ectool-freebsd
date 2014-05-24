@@ -1,0 +1,4 @@
+Command-line utils used to interact with Embedded Controller present in some
+Chromebooks.
+
+WWW: https://chromium.googlesource.com/chromiumos/platform/ec/
